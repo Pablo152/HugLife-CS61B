@@ -64,8 +64,6 @@ public class Clorus extends Creature {
     
     public void move() {
         this.energy -= 0.03;
-        if (this.energy < 0)
-            this.energy = 0;
     }
 
     /**
@@ -74,6 +72,16 @@ public class Clorus extends Creature {
     
     public void stay() {
         this.energy -= 0.01;
+    }
+    
+    /**
+    * Creates a new clorus and gives his offspring half his energy.
+    */
+
+    public Clorus replicate() {
+        Clorus clorusClone = new Clorus(this.energy / 2);
+        this.energy = this.energy / 2;
+        return clorusClone;
     }
     
     /**
@@ -112,15 +120,5 @@ public class Clorus extends Creature {
 
         return new Action(Action.ActionType.MOVE, HugLifeUtils.randomEntry(emptyNeighbors));
 
-    }
-    
-    /**
-    * Creates a new clorus and gives his offspring half his energy.
-    */
-
-    public Clorus replicate() {
-        Clorus clorusClone = new Clorus(this.energy / 2);
-        this.energy = this.energy / 2;
-        return clorusClone;
     }
 }
